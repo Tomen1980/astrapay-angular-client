@@ -1,0 +1,46 @@
+<div class="max-w-xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
+
+    <h2 class="text-2xl font-bold mb-6 text-gray-800">Add New Note</h2>
+
+    <div *ngIf="flashMessage" class="mb-4 p-3 rounded-md text-white"
+        [ngClass]="flashMessage.includes('successfully') ? 'bg-green-500' : 'bg-red-500'">
+        {{ flashMessage }}
+    </div>
+
+    <form [formGroup]="noteForm" (ngSubmit)="onSubmit()" class="space-y-4">
+
+        <div>
+            <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+            <input id="title" type="text" formControlName="title"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                placeholder="Enter note title" />
+            <div *ngIf="noteForm.get('title')?.invalid && noteForm.get('title')?.touched" class="text-red-500 text-sm">
+                Title is required
+            </div>
+            <div *ngIf="noteForm.get('title')?.hasError('minlength') && noteForm.get('title')?.touched"
+                class="text-red-500 text-sm">
+                Title must be at least 3 characters long
+            </div>
+        </div>
+
+        <div>
+            <label for="content" class="block text-sm font-medium text-gray-700">Content</label>
+            <textarea id="content" formControlName="content" rows="4"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                placeholder="Write your note here..."></textarea>
+            <div *ngIf="noteForm.get('content')?.invalid && noteForm.get('content')?.touched"
+                class="text-red-500 text-sm">
+                Content is required
+            </div>
+            <div *ngIf="noteForm.get('content')?.hasError('minlength') && noteForm.get('content')?.touched"
+                class="text-red-500 text-sm">
+                Content must be at least 3 characters long
+            </div>
+        </div>
+
+        <button type="submit" [disabled]="noteForm.invalid"
+            class="w-full px-4 py-2 bg-blue-600 text-white font-medium rounded-lg shadow hover:bg-blue-700 transition disabled:opacity-50">
+            Save Note
+        </button>
+    </form>
+</div>

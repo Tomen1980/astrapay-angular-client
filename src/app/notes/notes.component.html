@@ -1,9 +1,7 @@
 <div class="max-w-3xl mx-auto mt-8 px-4">
-  <!-- Heading -->
   <div class="flex items-center justify-between mb-6">
     <h1 class="text-3xl font-bold text-gray-800">All Your Notes</h1>
-    
-    <!-- Button Add Note -->
+
     <a 
       routerLink="/notes/form"
       class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition cursor-pointer"
@@ -12,7 +10,6 @@
     </a>
   </div>
 
-  <!-- Notes List -->
   <ul *ngIf="notes.length > 0; else noNotes" class="space-y-4">
     <li *ngFor="let note of notes" class="p-4 bg-white rounded-lg shadow hover:shadow-md transition">
       <div class="flex items-start justify-between">
@@ -21,7 +18,6 @@
           <p class="text-gray-600 mt-1">{{ note.content }}</p>
         </div>
 
-        <!-- Delete Button -->
         <button 
           (click)="deleteNote(note.id)" 
           class="ml-4 px-3 py-1 bg-red-600 text-white text-sm rounded-md shadow hover:bg-red-700 transition"
@@ -32,7 +28,7 @@
     </li>
   </ul>
 
-  <!-- No Notes Fallback -->
+
   <ng-template #noNotes>
     <p class="text-gray-500 italic mt-6">No notes available. Add one!</p>
   </ng-template>
